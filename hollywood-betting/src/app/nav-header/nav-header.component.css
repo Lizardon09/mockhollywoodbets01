@@ -1,0 +1,35 @@
+.navbarlevel1{
+    background-color: #0a0a0a!important;
+}
+
+.navbarlevel2{
+    background-color: #333333!important;
+}
+
+.navbarlevel3{
+    background-color: #232323!important;
+    border-top: 3px solid #643e94!important;
+}
+
+.loginbutton{
+    background-color: #643e94!important;
+}
+
+.registerbutton{
+    background-color: #31b35d!important;
+}
+
+.level2nav{
+    color: #ebebeb!important;
+    font-size: 12px;
+    padding: 7px;
+}
+
+.level3nav{
+    color: #ebebeb!important;
+    font-size: 12px;
+}
+
+.homeicon{
+    color: #666!important;
+}

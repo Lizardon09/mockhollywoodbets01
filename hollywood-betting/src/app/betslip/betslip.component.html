@@ -1,0 +1,93 @@
+<div class="col-md-12" >
+    <div class="row" style="min-width: 200px!important;border-radius: 0px;">
+        <div class="card text-white" style="border-color: transparent; background-color: #2b2b2b;" >
+            <div class="card-header" style="background-color: #643e94;border-radius: 0px;">
+                Bet Slip ({{betslipitems.length}})
+            </div>
+            <div *ngIf="default; else notDefault">
+                <div class="card-body" style="margin: 3px; background: #1e1e1e;">
+                    <p class="card-text"><strong>To place a bet: </strong> Choose the sport, tournament and event that you would like to bet on. Then select a market by clicking the odds that you would like to bet on</p>
+                </div>
+            </div>
+            <ng-template #notDefault>
+                <div *ngFor="let bet of betslipitems">
+                    <div class="card" style="margin: 3px; background: #1e1e1e;">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-10">
+                                    <h6 class="card-title">{{bet.id}}. {{bet.condition}} {{bet.subject}}</h6>
+                                </div>
+                                <div class="col-2">
+                                    <i class="fa fa-times" style="color: #d9534f;" (click) = "removeBet(bet)"></i>
+                                </div>
+                            </div>
+                            <p class="card-text">{{bet.event.event}}</p>
+                            <p class="card-text">{{bet.event.startime}}</p>
+                            <p class="card-text">{{bet.event.hometeam}} vs {{bet.event.awayteam}}</p>
+                            <div *ngIf="betslipitems.length==1">
+                                <button type="button" class="btn btn-primary btn-block" style="background:#643e94;border:#643e94">BOOK THIS BET</button>
+                                <hr style="border: 0.5px solid white;">
+                                  <div class="row">
+                                      <div class="col-sm-5 d-flex" style="border: 0.5px solid white;">
+                                        <div class="form-group-fluid d-flex">
+                                          <label style="font-size: xx-small;" for="">Stake:</label>
+                                          <input appcurrencyformatter="" style="min-width:50px; background: #2b2b2b; border: #a7a7a7; color: white;" class="form-control stake-input-box input-sm ng-pristine ng-valid ng-touched" min="1" type="number">
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-7 d-flex" style="border: 0.5px solid white;">
+                                        <div class="form-group-fluid d-flex">
+                                            <label style="font-size: xx-small;" for="">Potential Payout:</label>
+                                            <input appcurrencyformatter="" style="min-width:50px; background: #2b2b2b; border: #a7a7a7; color: white;" class="form-control potential-payout-input-box input-sm ng-pristine ng-valid ng-touched" min="0" type="number">
+                                          </div>
+                                      </div>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="betslipitems.length>1">
+                    <div class="card" style="margin: 3px; background: #1e1e1e;">
+                        <div class="card-body">
+                            <p class="card-text">Yes</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row d-flex justify-content-around">
+                            <div class="col-xs-6">
+                                <button type="button" class="btn btn-primary btn-block" style="background:#d9534f;border:#d9534f;" (click) = "clearBets()">CLEAR</button>
+                            </div>
+                            <div class="col-xs-6">
+                                <button type="button" class="btn btn-primary btn-block" style="background:#643e94;border:#643e94">LOG IN</button>
+                            </div>
+                        </div>
+                        <p class="card-text" style="font-size: small;">*Any payout involving Horse Racing is subject to 6% TAX</p>
+                        <p class="card-text" style="font-size: small;">*Min. stake ZAR 1</p>
+                    </div>
+                </div>
+
+            </ng-template>
+
+        </div>
+
+        <div class="card bg-dark text-white mt-2">
+          <img class="card-img" src="https://hollywoodmedia.hollywoodbets.net/images/cms/new-website/images/go-back-to-old-website.gif" alt="">
+          <div class="card-img-overlay">
+          </div>
+        </div>
+
+        <div class="mt-1">
+            <button type="button" class="btn btn-primary betButton mt-1" style="min-width: 205px!important;">Upload FICA</button>
+            <button type="button" class="btn btn-primary betButton mt-1" style="min-width: 205px!important;">Sports Blog</button>
+            <button type="button" class="btn btn-primary betButton mt-1" style="min-width: 205px!important;">Social Responsibility</button>
+            <button type="button" class="btn btn-primary betButton mt-1" style="min-width: 205px!important;">Soccer Betting News</button>
+            <button type="button" class="btn btn-primary betButton mt-1" style="min-width: 205px!important;">Winning Form</button>
+            <button type="button" class="btn btn-primary betButton mt-1" style="min-width: 205px!important;">Become and Affiliate</button>
+            <button type="button" class="btn btn-primary betButton mt-1" style="min-width: 205px!important;">Careers</button>
+        </div>
+       
+    </div>
+</div>

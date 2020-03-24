@@ -1,0 +1,23 @@
+[
+    {"id": 1, "name": "Betgames Africa", "img": "https://new.hollywoodbets.net/assets/images/icons/Betgames.svg"},
+    {"id": 2, "name": "Live In-Play", "img": "https://new.hollywoodbets.net/assets/images/icons/live-in-play.svg"},
+    {"id": 3, "name": "Sport Exotics", "img": "https://new.hollywoodbets.net/assets/images/icons/sport-exotics.svg"},
+    {"id": 4, "name": "Horse Racing", "img": "https://new.hollywoodbets.net/assets/images/icons/horse-racing.svg"},
+    {"id": 5, "name": "Soccer", "img": "https://new.hollywoodbets.net/assets/images/icons/soccer.svg"},
+    {"id": 6, "name": "Lucky Numbers", "img": "https://new.hollywoodbets.net/assets/images/icons/lucky-numbers.svg"},
+    {"id": 7, "name": "Rugby", "img": "https://new.hollywoodbets.net/assets/images/icons/rugby.svg"},
+    {"id": 8, "name": "Cricket", "img": "https://new.hollywoodbets.net/assets/images/icons/cricket.svg"},
+    {"id": 9, "name": "Golf", "img": "https://new.hollywoodbets.net/assets/images/icons/golf.svg"},
+    {"id": 10, "name": "Aussie Rules", "img": "https://new.hollywoodbets.net/assets/images/icons/aussie-rules.svg"},
+    {"id": 11, "name": "Bandy", "img": "https://new.hollywoodbets.net/assets/images/icons/bandy.svg"},
+    {"id": 12, "name": "BasketBall", "img": "https://new.hollywoodbets.net/assets/images/icons/basketball.svg"},
+    {"id": 13, "name": "Bowls", "img": "https://new.hollywoodbets.net/assets/images/icons/bowls.svg"},
+    {"id": 14, "name": "Boxing", "img": "https://new.hollywoodbets.net/assets/images/icons/boxing.svg"},
+    {"id": 15, "name": "Darts", "img": "https://new.hollywoodbets.net/assets/images/icons/darts.svg"},
+    {"id": 16, "name": "Futsal", "img": "https://new.hollywoodbets.net/assets/images/icons/futsal.svg"},
+    {"id": 17, "name": "Ice Hockey", "img": "https://new.hollywoodbets.net/assets/images/icons/ice-hockey.svg"},
+    {"id": 18, "name": "MMA", "img": "https://new.hollywoodbets.net/assets/images/icons/mma.svg"},
+    {"id": 19, "name": "Motorsport", "img": "https://new.hollywoodbets.net/assets/images/icons/motorsport.svg"},
+    {"id": 20, "name": "Table Tennis", "img": "https://new.hollywoodbets.net/assets/images/icons/sport-exotics.svg"},
+    {"id": 21, "name": "Vollyball", "img": "https://new.hollywoodbets.net/assets/images/icons/volleyball.svg"}
+]

@@ -1,0 +1,73 @@
+[
+    {
+        "id": 1, 
+        "event": "Gambia Division 2",
+        "start_time": "17:30",
+        "hometeam": "Jam City",
+        "awayteam": "Steve Biko",
+        "homeodds": 1.3,
+        "drawodds": 1.6,
+        "awayodds": 2.4,
+        "countrycode": "GM"
+    },
+
+    {
+        "id": 2, 
+        "event": "Gambia Division 2", 
+        "start_time": "18:00",
+        "hometeam": "Red Hawks FC",
+        "awayteam": "Jamhuri",
+        "homeodds": 1.2,
+        "drawodds": 1.62,
+        "awayodds": 2.6,
+        "countrycode": "GM"
+    },
+
+    {
+        "id": 3, 
+        "event": "Gambia Division 2", 
+        "start_time": "18:30",
+        "hometeam": "Samger",
+        "awayteam": "PSV Wellingans",
+        "homeodds": 3.2,
+        "drawodds": 1.87,
+        "awayodds": 0.9,
+        "countrycode": "GM"
+    },
+
+    {
+        "id": 4, 
+        "event": "Mauritania Division 2", 
+        "start_time": "16:30",
+        "hometeam": "Inter Nouckak",
+        "awayteam": "ASC Entertainers",
+        "homeodds": 1.5,
+        "drawodds": 2,
+        "awayodds": 1.62,
+        "countrycode": "MR"
+    },
+
+    {
+        "id": 5, 
+        "event": "Qatar Qatar Cup", 
+        "start_time": "16:30",
+        "hometeam": "Al-Markhiya",
+        "awayteam": "Al-Rayyan",
+        "homeodds": 9,
+        "drawodds": 6,
+        "awayodds": 0.6,
+        "countrycode": "QA"
+    },
+
+    {
+        "id": 6,
+        "event": "Mauritania Division 2", 
+        "start_time": "16:30",
+        "hometeam": "Inter Nouckak",
+        "awayteam": "ASC Entertainers",
+        "homeodds": 3.2,
+        "drawodds": 1.87,
+        "awayodds": 0.9,
+        "countrycode": "MR"
+    }
+]

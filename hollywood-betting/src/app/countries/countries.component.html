@@ -1,0 +1,12 @@
+<div *ngFor="let country of countries">
+
+    <div class="media mt-2" style="min-width: 100%!important;">
+        <a class="d-flex" style="background-color: #643e94;">
+            <img src="https://www.countryflags.io/{{country.code}}/flat/16.png" width="50" height="50" alt="B.E.T">
+        </a>
+        <div class="media-body text-nowrap" style="background-color: #2b2b2b;min-height: 50px;">
+            <p class="text-white mt-2" style="text-align: center;">{{country.name}}</p>
+        </div>
+    </div>
+
+</div>

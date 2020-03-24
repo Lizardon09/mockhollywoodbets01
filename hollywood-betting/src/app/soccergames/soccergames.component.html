@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-lg-6" style="padding-bottom: 10px;color: white;">
+        <table style="width: 100%;">
+          <tr *ngFor="let soccergame of soccer | slice: 0:3" style="background: #333333;">
+            <p>{{soccergame.start_time}} <img src="https://www.countryflags.io/{{soccergame.countrycode}}/flat/16.png"> {{soccergame.event}}</p>
+            <div class="btn-group w-100" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-secondary d-flex d-inline" style="background: #212121; max-width: 33.33%;" (click) = "addBet(soccergame, soccergame.hometeam, 'HomeWin', soccergame.homeodds)">
+                <div class="container d-flex justify-content-between" style="margin:0 ! important;padding: 0! important;">
+                  <p class="testtext" style="text-align: start;">{{soccergame.hometeam}}</p>
+                  <p class="hometext">{{soccergame.homeodds}}</p> 
+                </div>
+              </button>
+              <button type="button" class="btn btn-secondary d-flex d-inline" style="background: #212121; max-width: 33.33%;" (click) = "addBet(soccergame, '', 'Draw', soccergame.drawodds)">
+                <div class="container d-flex justify-content-between" style="margin:0 ! important;padding: 0! important;">
+                  <p class="testtext" style="text-align: start;">Draw</p>
+                  <p class="hometext">{{soccergame.drawodds}}</p> 
+                </div>
+              </button>
+              <button type="button" class="btn btn-secondary d-flex d-inline" style="background: #212121; max-width: 33.33%;" (click) = "addBet(soccergame, soccergame.awayteam, 'AwayWin', soccergame.awayodds)">
+                  <div class="container d-flex justify-content-between" style="margin:0 ! important;padding: 0! important;">
+                    <p class="testtext" style="text-align: start;">{{soccergame.awayteam}}</p>
+                    <p class="hometext">{{soccergame.awayodds}}</p> 
+                  </div>
+              </button>
+            </div>   
+          </tr>
+        </table>
+    </div>
+    
+    <div class="col-lg-6" style="padding-bottom: 10px;color: white;">
+      <table style="width: 100%;">
+        <tr *ngFor="let soccergame of soccer | slice: -3" style="background: #333333; margin-top: 5px;">
+          <p>{{soccergame.start_time}} <img src="https://www.countryflags.io/{{soccergame.countrycode}}/flat/16.png"> {{soccergame.event}}</p>
+          <div class="btn-group w-100" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-secondary d-flex d-inline" style="background: #212121; max-width: 33.33%;" (click) = "addBet(soccergame, soccergame.hometeam, 'HomeWin', soccergame.homeodds)">
+                <div class="container d-flex justify-content-between" style="margin:0 ! important;padding: 0! important;">
+                  <p class="testtext" style="text-align: start;">{{soccergame.hometeam}}</p>
+                  <p class="hometext">{{soccergame.homeodds}}</p> 
+                </div>
+              </button>
+              <button type="button" class="btn btn-secondary d-flex d-inline" style="background: #212121; max-width: 33.33%;" (click) = "addBet(soccergame, '', 'Draw', soccergame.drawodds)">
+                <div class="container d-flex justify-content-between" style="margin:0 ! important;padding: 0! important;">
+                  <p class="testtext" style="text-align: start;">Draw</p>
+                  <p class="hometext">{{soccergame.drawodds}}</p> 
+                </div>
+              </button>
+              <button type="button" class="btn btn-secondary d-flex d-inline" style="background: #212121; max-width: 33.33%;" (click) = "addBet(soccergame, soccergame.awayteam, 'AwayWin', soccergame.awayodds)">
+                  <div class="container d-flex justify-content-between" style="margin:0 ! important;padding: 0! important;">
+                    <p class="testtext" style="text-align: start;">{{soccergame.awayteam}}</p>
+                    <p class="hometext">{{soccergame.awayodds}}</p> 
+                  </div>
+              </button>
+            </div>  
+        </tr>
+      </table>
+    </div>
+</div>
