@@ -13,6 +13,7 @@ import { HttpClientModule }    from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SoccergamesComponent } from './soccergames/soccergames.component';
 import { CountriesComponent } from './countries/countries.component';
+import { TournamentsComponent } from './tournaments/tournaments.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CountriesComponent } from './countries/countries.component';
     FooterComponent,
     DashboardComponent,
     SoccergamesComponent,
-    CountriesComponent
+    CountriesComponent,
+    TournamentsComponent
   ],
   imports: [
     BrowserModule,

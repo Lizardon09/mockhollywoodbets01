@@ -1,6 +1,6 @@
 <div *ngFor="let country of countries">
 
-    <div class="media mt-2" style="min-width: 100%!important;">
+    <div class="media mt-2" style="min-width: 100%!important;" routerLink="tournaments/{{sportid}}/{{country.id}}" (click)="selectcountry(country.id)">
         <a class="d-flex" style="background-color: #643e94;">
             <img src="https://www.countryflags.io/{{country.code}}/flat/16.png" width="50" height="50" alt="B.E.T">
         </a>

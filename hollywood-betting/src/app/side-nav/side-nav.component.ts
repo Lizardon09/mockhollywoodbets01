@@ -5,6 +5,7 @@ import { Observable, Subject, combineLatest } from 'rxjs';
 import {FormControl} from '@angular/forms';
 import {debounceTime, distinctUntilChanged, switchMap, startWith, map} from 'rxjs/operators';
 import { ICountry } from '../services/betgame/country';
+import { RouterModule, Routes , Router} from '@angular/router';
 
 @Component({
   selector: 'app-side-nav',
@@ -13,7 +14,9 @@ import { ICountry } from '../services/betgame/country';
 })
 export class SideNavComponent implements OnInit {
 
-  constructor(private betgamesservice : BetgamesService) { }
+  constructor(private betgamesservice : BetgamesService,
+              private router : Router
+    ) { }
 
   arraySports:IBetgame[];
   games$:Observable<IBetgame[]>;

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import {IBetgame} from './betgame';
 import {ICountry} from './country';
+import {ITournament} from "./tournament";
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
@@ -11,8 +12,13 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class BetgamesService {
 
   private gamesurl : string = "/assets/data/betgames.json"
-  private gamesurl2: string = "https://localhost:44376/api/sport"
+  private sports: string = "https://localhost:44376/api/sport"
   private countrybysporturl: string = "https://localhost:44376/api/sportcountry"
+  private tournaments : string = "https://localhost:44376/api/tournament?"
+  private tournamentsport : string = "sportid="
+  private tournamentcountry : string = "countryid="
+
+  request : boolean = false;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -21,11 +27,15 @@ export class BetgamesService {
   constructor(private http : HttpClient) {}
 
   getGames() : Observable<IBetgame[]>{
-    return this.http.get<IBetgame[]>(this.gamesurl2);
+    return this.http.get<IBetgame[]>(this.sports);
   }
 
   getCountryBySport(id : number) : Observable<ICountry[]>{
     return this.http.get<ICountry[]>(this.countrybysporturl+"/"+id);
+  }
+
+  getTournaments(sportid : number, countryid : number) : Observable<ITournament[]>{
+    return this.http.get<ITournament[]>(this.tournaments + this.tournamentsport + sportid + "&" + this.tournamentcountry + countryid);
   }
 
 }
