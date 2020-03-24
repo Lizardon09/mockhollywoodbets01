@@ -18,7 +18,7 @@
 
             <div *ngFor="let game of filteredGames$ | async">
 
-                <div class="media mt-2" style="min-width: 100%!important;" routerLink="countries/{{game.id}}">
+                <div class="media mt-2" style="min-width: 100%!important;" routerLink="{{game.id}}/{{game.name}}">
                     <a class="d-flex" style="background-color: #643e94;">
                         <img src={{game.logo}} width="50" height="50" alt="B.E.T">
                     </a>
