@@ -38,37 +38,21 @@ export class CountriesComponent implements OnInit {
     });
   }
 
-  selectcountry(country : any){
+  selectcountry(selectedcountry : ICountry){
 
-    const selectedcountryindex =this.finaltournaments.indexOf(x=>x.country.id==country.id);
-
-    // const selectedcountryindex = this.selectedcountries.indexOf(country);
-    // console.log(selectedcountryindex);
-
-    if(selectedcountryindex>=0){
-      this.finaltournaments.splice(selectedcountryindex,1);
-    }
-    else{
-
-      this.betgameservice.getTournaments(this.sportid, country.id)
-      .subscribe((data : any) => {
-        this.addTournaments(country,data);
-      });
-
-      // this.selectedcountries.push(country);
-      // this.betgameservice.getTournaments(this.sportid, country.id)
-      // .subscribe((data : any) => {this.tournaments.push(data);});
+    for(let i=0; i<this.finaltournaments.length; i++){
+      if(this.finaltournaments[i].country.id==selectedcountry.id){
+        this.finaltournaments.splice(i,1);
+        return;
+      }
     }
 
-    // console.log(this.selectedcountries);
+    this.betgameservice.getTournaments(this.sportid, selectedcountry.id)
+    .subscribe((data : any) => {
+      this.addTournaments(selectedcountry,data);
+    });
 
-    //console.log(this.finaltournaments);
-    //this.router.navigateByUrl("tournaments/"+this.sportid+"/"+countryid)
   }
-
-  // gettournaments(selectedcountry : any) : ITournament[]{
-  //   return this.betgameservice.getTournaments(this.sportid, selectedcountry.id);
-  // }
 
   addTournaments(country : ICountry, tournament:ITournament[]){
 
@@ -86,8 +70,6 @@ export class CountriesComponent implements OnInit {
     this.sportid = +this.route.snapshot.paramMap.get('id');
     this.betgameservice.getCountryBySport(this.sportid)
         .subscribe((data : any) => {this.countries=data;});
-    //this.countries = this.betgameservice.getCountryBySport(id);
-    //this.countries.subscribe(res => console.log(res));
   }
   
 }
