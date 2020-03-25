@@ -13,7 +13,7 @@ export class BetgamesService {
 
   private gamesurl : string = "/assets/data/betgames.json"
   private sports: string = "https://localhost:44376/api/sport"
-  private countrybysporturl: string = "https://localhost:44376/api/sportcountry"
+  private countrybysporturl: string = "https://localhost:44376/api/sportcountry?"
   private tournaments : string = "https://localhost:44376/api/tournament?"
   private tournamentsport : string = "sportid="
   private tournamentcountry : string = "countryid="
@@ -30,8 +30,8 @@ export class BetgamesService {
     return this.http.get<IBetgame[]>(this.sports);
   }
 
-  getCountryBySport(id : number) : Observable<ICountry[]>{
-    return this.http.get<ICountry[]>(this.countrybysporturl+"/"+id);
+  getCountryBySport(sportid : number) : Observable<ICountry[]>{
+    return this.http.get<ICountry[]>(this.countrybysporturl+this.tournamentsport+sportid);
   }
 
   getTournaments(sportid : number, countryid : number) : Observable<ITournament[]>{

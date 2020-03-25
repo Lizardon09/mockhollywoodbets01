@@ -18,12 +18,9 @@ import {ITournamentassociation} from '../services/betgame/tournamentassociation'
 export class CountriesComponent implements OnInit {
 
   countries: ICountry[];
-  tournaments : ITournament[];
   sportid : number;
   tournamentassociation : ITournamentassociation;
   finaltournaments : any[] = [];
-
-  // selectedcountries : ICountry[] = [];
 
   constructor(private betgameservice : BetgamesService,
               private route : ActivatedRoute,
