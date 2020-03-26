@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import {IBetgame} from './betgame';
 import {ICountry} from './country';
 import {ITournament} from "./tournament";
+import {IEvent} from './event';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
@@ -17,6 +18,8 @@ export class BetgamesService {
   private tournaments : string = "https://localhost:44376/api/tournament?"
   private tournamentsport : string = "sportid="
   private tournamentcountry : string = "countryid="
+  private eventsurl : string = "https://localhost:44376/api/event?"
+  private eventtournament : string = "tournamentid="
 
   request : boolean = false;
 
@@ -36,6 +39,11 @@ export class BetgamesService {
 
   getTournaments(sportid : number, countryid : number) : Observable<ITournament[]>{
     return this.http.get<ITournament[]>(this.tournaments + this.tournamentsport + sportid + "&" + this.tournamentcountry + countryid);
+  }
+
+  getEvents(tournamentid : number) : Observable<IEvent[]>{
+    console.log(tournamentid);
+    return this.http.get<IEvent[]>(this.eventsurl + this.eventtournament + tournamentid);
   }
 
 }

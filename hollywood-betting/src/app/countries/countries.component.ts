@@ -19,6 +19,7 @@ export class CountriesComponent implements OnInit {
 
   countries: ICountry[];
   sportid : number;
+  sportname : string;
   tournamentassociation : ITournamentassociation;
   finaltournaments : any[] = [];
 
@@ -65,8 +66,13 @@ export class CountriesComponent implements OnInit {
   getCountryBySport()
   {
     this.sportid = +this.route.snapshot.paramMap.get('id');
+    this.sportname = this.route.snapshot.paramMap.get('sportname');
     this.betgameservice.getCountryBySport(this.sportid)
         .subscribe((data : any) => {this.countries=data;});
+  }
+
+  goToEvent(tournament : ITournament){
+    this.router.navigateByUrl(this.sportid + "/" + this.sportname + "/" + "tournament/"+tournament.id+"/"+tournament.name);
   }
   
 }

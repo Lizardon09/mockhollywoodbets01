@@ -14,6 +14,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SoccergamesComponent } from './soccergames/soccergames.component';
 import { CountriesComponent } from './countries/countries.component';
 import { TournamentsComponent } from './tournaments/tournaments.component';
+import { EventsComponent } from './events/events.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { TournamentsComponent } from './tournaments/tournaments.component';
     DashboardComponent,
     SoccergamesComponent,
     CountriesComponent,
-    TournamentsComponent
+    TournamentsComponent,
+    EventsComponent
   ],
   imports: [
     BrowserModule,
