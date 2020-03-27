@@ -6,6 +6,7 @@ import {debounceTime, distinctUntilChanged, switchMap, startWith, map} from 'rxj
 import { IEvent } from '../services/betgame/event';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
+import { IBettype } from '../services/betgame/bettype';
 
 @Component({
   selector: 'app-events',
@@ -15,7 +16,9 @@ import {Location} from '@angular/common';
 export class EventsComponent implements OnInit {
 
   events : IEvent[];
+  bettypes : IBettype[];
   tournamentname : string;
+  selectedbettype : IBettype;
 
   constructor(private betgameservice : BetgamesService,
     private route : ActivatedRoute,
@@ -27,14 +30,30 @@ export class EventsComponent implements OnInit {
     //this.getTournaments();
     this.route.params.subscribe(routeParams => {
       this.getEvents();
+      this.getBettypes();
     });
   }
 
   getEvents(){
     const tournamentid = +this.route.snapshot.paramMap.get('tournamentid');
     this.tournamentname = this.route.snapshot.paramMap.get('tournamentname');
-    this.betgameservice.getEvents(tournamentid)
+
+    return this.betgameservice.getEvents(tournamentid)
         .subscribe((data : any) => {this.events=data;});
+
+  }
+
+  getBettypes(){
+    const tournamentid = +this.route.snapshot.paramMap.get('tournamentid');
+    this.tournamentname = this.route.snapshot.paramMap.get('tournamentname');
+
+    return this.betgameservice.getBettypes(tournamentid)
+    .subscribe((data : any) => {this.bettypes=data;this.selectedbettype=data[0]});
+
+  }
+
+  selectBettype(bettype : IBettype){
+    this.selectedbettype = bettype;
   }
 
 }
