@@ -1,5 +1,5 @@
 import {ITournament} from './tournament';
-import {ICountry} from './country';
+import {ICountry} from '../country/country';
 
 export interface ITournamentassociation{
     sportid : number;

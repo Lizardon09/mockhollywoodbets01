@@ -1,0 +1,24 @@
+<div class="row justify-content-between">
+    <div class="col-md-12">
+
+        <table *ngFor="let dateevent of dateevents" class="table text-white">
+            <thead class="thead" style="background-color: #1e1e1e!important;">
+              <tr>
+                <th scope="row"><h3>{{dateevent.date | date :  "fullDate"}}</h3></th>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </thead>
+            <tbody>
+                    <tr *ngFor="let eventmarket of dateevent.eventmarket"  style="background-color: #333333!important;">
+                        <th scope="row">{{eventmarket.event.date | date: "HH:mm"}}</th>
+                        <td>{{eventmarket.event.name}}</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+            </tbody>
+        </table>
+          
+      </div>
+</div>

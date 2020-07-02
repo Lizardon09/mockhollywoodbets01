@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {SoccergamesComponent} from './soccergames/soccergames.component';
 import {CountriesComponent} from './countries/countries.component';
-import {TournamentsComponent} from './tournaments/tournaments.component';
 import {EventsComponent} from './events/events.component';
 
 const routes: Routes = [
@@ -11,7 +10,6 @@ const routes: Routes = [
   {path: 'soccergames', component: SoccergamesComponent},
   {path: ':id/:sportname', component: CountriesComponent},
   {path: 'countries/:id', component:CountriesComponent},
-  {path: 'tournaments/:sportid/:countryid', component:TournamentsComponent},
   {path: 'tournament/:tournamentid/:tournamentname', component:EventsComponent},
   {path: ':sportid/:sportname/tournament/:tournamentid/:tournamentname', component:EventsComponent},
   {path:'',redirectTo:'/soccergames',pathMatch:'full'}

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {BetgamesService} from '../services/betgame/betgames.service';
-import { IBetgame } from '../services/betgame/betgame';
+import { IBetgame } from '../services/betgame/sport/betgame';
 import { Observable, Subject, combineLatest } from 'rxjs';
 import {FormControl} from '@angular/forms';
 import {debounceTime, distinctUntilChanged, switchMap, startWith, map} from 'rxjs/operators';
-import { ICountry } from '../services/betgame/country';
+import { ICountry } from '../services/betgame/country/country';
 import { RouterModule, Routes , Router} from '@angular/router';
+import {SportService} from '../services/betgame/sport/sport.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -14,8 +14,8 @@ import { RouterModule, Routes , Router} from '@angular/router';
 })
 export class SideNavComponent implements OnInit {
 
-  constructor(private betgamesservice : BetgamesService,
-              private router : Router
+  constructor(private router : Router,
+              private sportservice : SportService
     ) { }
 
   arraySports:IBetgame[];
@@ -24,15 +24,13 @@ export class SideNavComponent implements OnInit {
   filter: FormControl;
   filter$:Observable<string>;
 
-  countries:Observable<ICountry[]>;
-
   ngOnInit(): void {
     this.sideNavSearch();
   }
 
   sideNavSearch()
   {
-    this.games$ = this.betgamesservice.getGames();
+    this.games$ = this.sportservice.getGames();
     this.filter = new FormControl('');
     this.filter$ = this.filter.valueChanges.pipe(startWith(''));
     this.filteredGames$ = combineLatest(this.games$, this.filter$).pipe(

@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {BetgamesService} from '../services/betgame/betgames.service';
 import { Observable, Subject, combineLatest } from 'rxjs';
 import {FormControl} from '@angular/forms';
 import {debounceTime, distinctUntilChanged, switchMap, startWith, map} from 'rxjs/operators';
-import { ICountry } from '../services/betgame/country';
+import { ICountry } from '../services/betgame/country/country';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import { RouterModule, Routes , Router} from '@angular/router';
-import { ITournament } from '../services/betgame/tournament';
-import {ITournamentassociation} from '../services/betgame/tournamentassociation';
+import { ITournament } from '../services/betgame/tournament/tournament';
+import {ITournamentassociation} from '../services/betgame/tournament/tournamentassociation';
+import {CountryService} from '../services/betgame/country/country.service';
+import {TournamentService} from '../services/betgame/tournament/tournament.service';
 
 @Component({
   selector: 'app-countries',
@@ -23,10 +24,11 @@ export class CountriesComponent implements OnInit {
   tournamentassociation : ITournamentassociation;
   finaltournaments : any[] = [];
 
-  constructor(private betgameservice : BetgamesService,
-              private route : ActivatedRoute,
+  constructor(private route : ActivatedRoute,
               private location: Location,
-              private router : Router
+              private router : Router,
+              private countryservice : CountryService,
+              private tournamentservice : TournamentService
               ) { }
 
   ngOnInit(): void {
@@ -45,7 +47,7 @@ export class CountriesComponent implements OnInit {
       }
     }
 
-    this.betgameservice.getTournaments(this.sportid, selectedcountry.id)
+    this.tournamentservice.getTournaments(this.sportid, selectedcountry.id)
     .subscribe((data : any) => {
       this.addTournaments(selectedcountry,data);
     });
@@ -67,7 +69,7 @@ export class CountriesComponent implements OnInit {
   {
     this.sportid = +this.route.snapshot.paramMap.get('id');
     this.sportname = this.route.snapshot.paramMap.get('sportname');
-    this.betgameservice.getCountryBySport(this.sportid)
+    this.countryservice.getCountryBySport(this.sportid)
         .subscribe((data : any) => {this.countries=data;});
   }
 

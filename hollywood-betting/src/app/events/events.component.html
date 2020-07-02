@@ -1,35 +1,90 @@
-<div class="col-md-12">
-    <table class="table text-white">
-        <thead class="thead" style="background-color: #1e1e1e!important;">
-          <tr>
-            <th scope=""></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col d-flex justify-content-end">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                                {{selectedbettype.bettypeName}}
-                            </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                
-                        <div *ngFor="let bettype of bettypes">
-                
-                            <a *ngIf="!(bettype===selectedbettype)" class="dropdown-item" (click)="selectBettype(bettype)">{{bettype.bettypeName}}</a>
-                
-                        </div>
-                    </div>
+<div class="row justify-content-between">
+
+    <div class="col-md-9">
+
+        <div class="container" style="color: white;">
+            <h5>{{tournamentname}}</h5>
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="dropdown" align="right" style="padding: 0%!important;">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                        {{selectedbettype.name}}
+                    </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
+        
+                <div *ngFor="let bettype of bettypes">
+        
+                    <a *ngIf="!(bettype===selectedbettype)" class="dropdown-item" (click)="selectBettype(bettype)">{{bettype.name}}</a>
+        
                 </div>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-                <tr *ngFor="let event of events"  style="background-color: #333333!important;">
-                    <th scope="row">{{event.eventDate | date: "HH:mm"}}</th>
-                    <td>{{event.eventName}}</td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-        </tbody>
-      </table>
-  </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row justify-content-between">
+    <div class="col-md-12">
+        <table *ngFor="let dateevent of dateevents" class="table text-white">
+            <thead class="thead" style="background-color: #1e1e1e!important;">
+              <tr>
+                <th scope="row"><h3>{{dateevent.date | date :  "fullDate"}}</h3></th>
+                <th></th>
+                <td></td>
+                <td></td>
+              </tr>
+            </thead>
+            <tbody>
+                    <tr *ngFor="let eventmarket of dateevent.eventmarket"  style="background-color: #333333!important;">
+                        <th scope="row">{{eventmarket.event.date | date: "HH:mm"}}</th>
+                        <td>{{eventmarket.event.name}}</td>
+                        <td>
+
+                            <div class="col-md-12 btn-group" role="group" aria-label="Basic example" style="min-width:200%!important">
+                                <div *ngFor="let market of eventmarket.markets">
+
+                                    <div *ngIf="(market.bettypeId == selectedbettype.id)" class="media" style="min-width: 100%!important;">
+
+                                        <!-- <div class="media-body text-nowrap" style="background-color: #2b2b2b;min-height: 50px;">
+                                            <button type="button" class="btn btn-primary" style="background-color: #333333">{{market.marketName}} {{market.odds}}</button>
+                                        </div> -->
+
+                                        <button type="button" class="btn btn-primary" style="background-color: #333333">{{market.marketName}} {{market.odds}}</button>
+
+                                    </div>
+
+                                    <!-- <button *ngIf="(market.bettypeId == selectedbettype.id)" type="button" class="btn- btn-outline-primary BtnOverflow" style="color: Black!important;" data-toggle="tooltip" data-placement="bottom" title="{{market.marketName}} {{market.odds}}">
+                                        <small>
+                                            {{market.marketName}} {{market.odds}}
+                                        </small>
+                                    </button> -->
+
+                                </div>
+                            </div>
+
+                            <!-- <div *ngFor="let market of eventmarket.markets">
+                                <button *ngIf="(market.bettypeId == selectedbettype.id)">{{market.marketName}} {{market.odds}}</button>
+                            </div> -->
+                            
+                        </td>
+                        <td></td>
+                      </tr>
+            </tbody>
+          </table>
+      </div>
+</div>
+
+
+
+    <!-- <p style="color: white;">{{tournamentname}}</p>
+    <app-tabletemplate [events]="eventmarkets" [bettype]="selectedbettype">
+    </app-tabletemplate> -->
+
+
+
