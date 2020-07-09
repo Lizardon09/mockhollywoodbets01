@@ -23,8 +23,8 @@ export class SoccergamesComponent implements OnInit {
     .subscribe(soccergames => this.soccer=soccergames);
   }
 
-  addBet(bet:ISoccer, player:string, condition:string, odds:number) : void{
-    this.betslipservice.addBet(bet, "soccer", player, condition, odds);
-  }
+  // addBet(bet:ISoccer, player:string, condition:string, odds:number) : void{
+  //   this.betslipservice.addBet(bet, "soccer", player, condition, odds);
+  // }
 
 }

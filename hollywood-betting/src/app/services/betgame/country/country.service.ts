@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import {ICountry} from './country';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
@@ -21,7 +21,15 @@ export class CountryService {
   constructor(private http : HttpClient) { }
 
   getCountryBySport(sportid : number) : Observable<ICountry[]>{
-    return this.http.get<ICountry[]>(this.countrybysporturl+this.sportidparam+sportid);
+    return this.http.get<ICountry[]>(this.countrybysporturl+this.sportidparam+sportid)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  handleError(error: HttpErrorResponse){
+    console.log(error);
+    return of([]);
   }
 
 }

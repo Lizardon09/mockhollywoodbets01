@@ -15,42 +15,120 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-10">
-                                    <h6 class="card-title">{{bet.id}}. {{bet.condition}} {{bet.subject}}</h6>
+                                    <h6 class="card-title">{{bet.id}}. {{bet.bettype.name}} - {{bet.market.marketName}}</h6>
                                 </div>
                                 <div class="col-2">
                                     <i class="fa fa-times" style="color: #d9534f;" (click) = "removeBet(bet)"></i>
                                 </div>
                             </div>
-                            <p class="card-text">{{bet.event.event}}</p>
-                            <p class="card-text">{{bet.event.startime}}</p>
-                            <p class="card-text">{{bet.event.hometeam}} vs {{bet.event.awayteam}}</p>
-                            <div *ngIf="betslipitems.length==1">
+                            <p class="card-text">{{bet.sportype.name}} {{bet.odds}}</p>
+                            <p class="card-text">{{bet.date}}</p>
+                            <p class="card-text">{{bet.event.name}}</p>
+
                                 <button type="button" class="btn btn-primary btn-block" style="background:#643e94;border:#643e94">BOOK THIS BET</button>
                                 <hr style="border: 0.5px solid white;">
-                                  <div class="row">
-                                      <div class="col-sm-5 d-flex" style="border: 0.5px solid white;">
-                                        <div class="form-group-fluid d-flex">
-                                          <label style="font-size: xx-small;" for="">Stake:</label>
-                                          <input appcurrencyformatter="" style="min-width:50px; background: #2b2b2b; border: #a7a7a7; color: white;" class="form-control stake-input-box input-sm ng-pristine ng-valid ng-touched" min="1" type="number">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-7 d-flex" style="border: 0.5px solid white;">
-                                        <div class="form-group-fluid d-flex">
-                                            <label style="font-size: xx-small;" for="">Potential Payout:</label>
-                                            <input appcurrencyformatter="" style="min-width:50px; background: #2b2b2b; border: #a7a7a7; color: white;" class="form-control potential-payout-input-box input-sm ng-pristine ng-valid ng-touched" min="0" type="number">
-                                          </div>
-                                      </div>
-                                  </div>
-                            </div>
+
+                                  <div class="row" style="align-content: center!important;justify-content: center!important;display: flex!important;">
+                                    <div class="col-md-6">
+                                      
+                                      <label style="font-size:small;">
+                                          Stake : R  <input appcurrencyformatter="" #box (keyup)="calculatePayoutForStake(box.value,bet.odds,bet.id)" (click)="calculatePayoutForStake(box.value,bet.odds,bet.id)" value="{{bet.stake}}" class="form-control stake-input-box input-sm ng-pristine ng-valid ng-touched spinner"  min="1" type="number"  >
+                                         </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <label style="font-size:small;">
+                                          Payout : R 
+                                          <input appcurrencyformatter="" #payout (keyup)="calculateStakeForPayout(payout.value,bet.odds,bet.id)" (click)="calculateStakeForPayout(payout.value,bet.odds,bet.id)"  value="{{bet.payout}}" class="form-control stake-input-box input-sm ng-pristine ng-valid ng-touched spinner"  min="1" type="number">
+                                      </label>
+                                    </div>
+                                    </div>
                         </div>
                     </div>
                 </div>
 
                 <div *ngIf="betslipitems.length>1">
-                    <div class="card" style="margin: 3px; background: #1e1e1e;">
-                        <div class="card-body">
-                            <p class="card-text">Yes</p>
+                    <div class="card text-white" style="border-color: transparent; background-color: #2b2b2b;" >
+                        <div class="card-header" style="background-color: #643e94;border-radius: 0px;">
+                            Multiple
                         </div>
+                        <div class="card-body text-center">
+                            <div class="row d-flex text-nowrap justify-content-around" style="color: chartreuse;">
+                                <div class="col-3">
+                                    <p class="card-text">Odds</p>
+                                    <p class="card-text">{{multipleodds}}</p>
+                                </div>
+                                <div class="col-3">
+                                    <p class="card-text">Bonus</p>
+                                    <p class="card-text">{{bonus}}%</p>
+                                </div>
+                                <div class="col-6">
+                                    <p class="card-text">Final Odds</p>
+                                    <p class="card-text">{{finalodds}}</p>
+                                </div>
+                                
+                            </div>
+
+                            <div class="row d-flex justify-content-around mt-3">
+                                <div class="col-12">
+                                    <button type="button" class="btn btn-primary btn-block" style="background:#643e94;border:#643e94">BOOK MULTIPLE</button>
+                                    <hr style="border: 0.5px solid white;">
+                                </div>
+                                <div class="col-md-6">
+                                          
+                                    <label style="font-size:small;">
+                                        Stake : R  <input appcurrencyformatter="" #box (keyup)="calculateMultiplePayoutForStake(box.value)" (click)="calculateMultiplePayoutForStake(box.value)" value="{{multiplestake}}" class="form-control stake-input-box input-sm ng-pristine ng-valid ng-touched spinner"  min="1" type="number"  >
+                                       </label>
+                                       <br>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <label style="font-size:small;">
+                                        Payout : R 
+                                        <input appcurrencyformatter="" #payout (keyup)="calculateMultipleStakeForPayout(payout.value)" (click)="calculateMultipleStakeForPayout(payout.value)"  value="{{multiplepayout}}" class="form-control stake-input-box input-sm ng-pristine ng-valid ng-touched spinner"  min="1" type="number">
+                                    </label>
+                                    <br>
+                                  </div>
+                            </div>
+
+
+                            <br>
+                            <p class="card-text" style="color:#2290cf;">Bet {{nextbonus.legs}} legs for a {{nextbonus.bonus}}% bonus</p>
+                            <a name="bonustable" id="" style="color:goldenrod"  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Show Bonus Table</a>
+
+                        </div>
+
+                        <div class="collapse" id="collapseExample">
+
+                            <div class="container">
+                                <table class="table table-bordered text-white">
+                                    <thead class="thead" style="background-color: #1e1e1e!important;">
+                                      <tr>
+                                        <th scope="row"><h3>Legs</h3></th>
+                                        <th scope="row"><h3>Bonus</h3></th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let bonusentry of bonustable"  style="background-color: #333333!important;">
+
+                                            <div *ngIf="bonusentry.bonus==bonus; then highlightCell else defaultCell"></div>
+
+                                            <ng-template #highlightCell>
+                                                <td style="background-color: #145377 !important;">{{bonusentry.legs}}</td>
+                                                <td style="background-color: #145377 !important;">{{bonusentry.bonus}}%</td>
+                                            </ng-template>
+
+                                            <ng-template #defaultCell>
+                                                <td>{{bonusentry.legs}}</td>
+                                                <td>{{bonusentry.bonus}}%</td>
+                                            </ng-template>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                        </div>
+                        
                     </div>
                 </div>
     
@@ -64,6 +142,7 @@
                                 <button type="button" class="btn btn-primary btn-block" style="background:#643e94;border:#643e94">LOG IN</button>
                             </div>
                         </div>
+                        <br>
                         <p class="card-text" style="font-size: small;">*Any payout involving Horse Racing is subject to 6% TAX</p>
                         <p class="card-text" style="font-size: small;">*Min. stake ZAR 1</p>
                     </div>
@@ -73,11 +152,7 @@
 
         </div>
 
-        <div class="card bg-dark text-white mt-2">
-          <img class="card-img" src="https://hollywoodmedia.hollywoodbets.net/images/cms/new-website/images/go-back-to-old-website.gif" alt="" style="min-width: 100%!important;">
-          <div class="card-img-overlay">
-          </div>
-        </div>
+        <img class="card-img mt-2" src="https://hollywoodmedia.hollywoodbets.net/images/cms/new-website/images/go-back-to-old-website.gif" alt="" style="min-width: 100%!important;">
 
         <div class="mt-1">
             <button type="button" class="btn btn-primary betButton mt-1" style="min-width: 100%!important;">Upload FICA</button>

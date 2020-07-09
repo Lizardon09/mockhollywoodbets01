@@ -16,6 +16,12 @@ import { CountriesComponent } from './countries/countries.component';
 import { EventsComponent } from './events/events.component';
 import { TabletemplateComponent } from './table-template/tabletemplate/tabletemplate.component';
 
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './store/reducers/countries.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { CountryEffects } from './store/effects/countries.effects';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +40,11 @@ import { TabletemplateComponent } from './table-template/tabletemplate/tabletemp
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forRoot({
+      countries: reducer
+    }),
+    EffectsModule.forRoot([CountryEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

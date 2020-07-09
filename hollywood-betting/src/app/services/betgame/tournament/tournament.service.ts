@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import {ITournament} from "./tournament";
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -22,7 +22,15 @@ export class TournamentService {
   constructor(private http : HttpClient) { }
 
   getTournaments(sportid : number, countryid : number) : Observable<ITournament[]>{
-    return this.http.get<ITournament[]>(this.tournaments + this.sportidparam + sportid + "&" + this.countryidparam + countryid);
+    return this.http.get<ITournament[]>(this.tournaments + this.sportidparam + sportid + "&" + this.countryidparam + countryid)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  handleError(error: HttpErrorResponse){
+    console.log(error);
+    return of([]);
   }
 
 }

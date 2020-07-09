@@ -1,0 +1,9 @@
+[
+    {"legs" : 2, "bonus" : 2.5},
+    {"legs" : 3, "bonus" : 3},
+    {"legs" : 4, "bonus" : 4},
+    {"legs" : 5, "bonus" : 10},
+    {"legs" : 11, "bonus" : 15},
+    {"legs" : 16, "bonus" : 20},
+    {"legs" : 25, "bonus" : 30}
+]

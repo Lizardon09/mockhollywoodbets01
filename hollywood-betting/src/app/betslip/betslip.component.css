@@ -8,3 +8,15 @@
     border-color: transparent; 
     background-color: #2b2b2b;
 }
+
+.spinner{
+    background-color: #333333;
+    color: white;
+    border-radius: 0px;
+    border-color: #333333;
+ 
+}
+
+table, th, tr, td{
+    border: 2px solid 2290cf !important;
+}

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import {IBettype} from './bettype';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -21,7 +21,15 @@ export class BettypeService {
   constructor(private http : HttpClient) {}
 
   getBettypes(tournamentid : number) : Observable<IBettype[]>{
-    return this.http.get<IBettype[]>(this.bettypes + this.tournamentidparam + tournamentid);
+    return this.http.get<IBettype[]>(this.bettypes + this.tournamentidparam + tournamentid)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  handleError(error: HttpErrorResponse){
+    console.log(error);
+    return of([]);
   }
 
 }

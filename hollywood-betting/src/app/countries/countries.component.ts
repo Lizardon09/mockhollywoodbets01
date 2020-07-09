@@ -11,6 +11,10 @@ import {ITournamentassociation} from '../services/betgame/tournament/tournamenta
 import {CountryService} from '../services/betgame/country/country.service';
 import {TournamentService} from '../services/betgame/tournament/tournament.service';
 
+import { Store, State } from '@ngrx/store';
+import * as CountryActions from '../store/actions/country.actions';
+import {AppState} from '../store/state/app.state';
+
 @Component({
   selector: 'app-countries',
   templateUrl: './countries.component.html',
@@ -18,7 +22,8 @@ import {TournamentService} from '../services/betgame/tournament/tournament.servi
 })
 export class CountriesComponent implements OnInit {
 
-  countries: ICountry[];
+  countries: Observable<ICountry>[];
+  //countries: ICountry[];
   sportid : number;
   sportname : string;
   tournamentassociation : ITournamentassociation;
@@ -28,12 +33,19 @@ export class CountriesComponent implements OnInit {
               private location: Location,
               private router : Router,
               private countryservice : CountryService,
-              private tournamentservice : TournamentService
-              ) { }
+              private tournamentservice : TournamentService,
+              private store: Store<AppState>
+              ) {
+                store.select(state => state.countries)
+                  .subscribe((data: any) => {
+                    this.countries = data;
+                  });
+               }
 
   ngOnInit(): void {
     //this.getCountryBySport();
     this.route.params.subscribe(routeParams => {
+      this.finaltournaments = [];
       this.getCountryBySport();
     });
   }
@@ -69,8 +81,11 @@ export class CountriesComponent implements OnInit {
   {
     this.sportid = +this.route.snapshot.paramMap.get('id');
     this.sportname = this.route.snapshot.paramMap.get('sportname');
-    this.countryservice.getCountryBySport(this.sportid)
-        .subscribe((data : any) => {this.countries=data;});
+
+    // this.countryservice.getCountryBySport(this.sportid)
+    //     .subscribe((data : any) => {this.countries=data;});
+
+    this.store.dispatch(new CountryActions.GetCountries(this.sportid));
   }
 
   goToEvent(tournament : ITournament){

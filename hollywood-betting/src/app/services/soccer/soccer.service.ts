@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import {ISoccer} from './soccer';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -18,7 +18,14 @@ export class SoccerService {
   constructor(private http : HttpClient) { }
 
   getSoccer() : Observable<ISoccer[]>{
-    return this.http.get<ISoccer[]>(this.gamesurl);
+    return this.http.get<ISoccer[]>(this.gamesurl)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
+  handleError(error: HttpErrorResponse){
+    console.log(error);
+    return of([]);
+  }
 }

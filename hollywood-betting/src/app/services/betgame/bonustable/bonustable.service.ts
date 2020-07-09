@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
-import {IBetgame} from './betgame';
+import {IBonus} from './bonus';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SportService {
+export class BonustableService {
 
-  private gamesurl : string = "/assets/data/betgames.json";
-  private sports: string = "https://localhost:44376/api/sport";
+  private bonustableurl : string = "/assets/data/bonustable.json";
 
   request : boolean = false;
 
@@ -20,8 +19,8 @@ export class SportService {
 
   constructor(private http : HttpClient) { }
 
-  getGames() : Observable<IBetgame[]>{
-    return this.http.get<IBetgame[]>(this.sports)
+  getBonusTable() : Observable<IBonus[]>{
+    return this.http.get<IBonus[]>(this.bonustableurl)
       .pipe(
         catchError(this.handleError)
       );
@@ -31,5 +30,4 @@ export class SportService {
     console.log(error);
     return of([]);
   }
-
 }

@@ -12,6 +12,10 @@ import {MarketService} from '../services/betgame/market/market.service';
 import { IMarket } from '../services/betgame/market/market';
 import { IEventMarket } from '../services/betgame/event/eventmarket';
 import { IDateEvent } from '../services/betgame/event/dateevent';
+import {BetslipService} from '../services/betslip/betslip.service';
+import {IBetslipitem} from '../services/betslip/betslipitem';
+import { IBetgame } from '../services/betgame/sport/betgame';
+import { ITournament } from '../services/betgame/tournament/tournament';
 
 @Component({
   selector: 'app-events',
@@ -31,12 +35,16 @@ export class EventsComponent implements OnInit {
   tempeventmarket : IEventMarket;
   dateevents : IDateEvent[] = [];    
   dateevent : IDateEvent = {date: null, eventmarket:[]};
+  sentBet : IBetslipitem = {id:-1, market:null, sportype:null, odds:0, tournament:null, date:null, event:null, bettype:null, stake:0, payout:0};
+  sporType : IBetgame = {id:-1, name:"", logo:""};
+  tournament : ITournament = {id:-1,name:""};
 
   constructor(private route : ActivatedRoute,
     private location : Location,
     private eventservice : EventService,
     private bettypeservice : BettypeService,
-    private marketservice : MarketService
+    private marketservice : MarketService,
+    private betslipservice : BetslipService
   ) { }
 
   ngOnInit(): void {
@@ -44,13 +52,21 @@ export class EventsComponent implements OnInit {
     this.route.params.subscribe(routeParams => {
       this.getEvents();
       this.getBettypes();
-      this.getMarkets();
+      this.waitForOneSecond().then((value)=>this.getMarkets());
+      //this.getMarkets();
     });
   }
 
   getEvents(){
+
+    this.sporType.id = +this.route.snapshot.paramMap.get('sportid');
+    this.sporType.name = this.route.snapshot.paramMap.get('sportname');
+
     const tournamentid = +this.route.snapshot.paramMap.get('tournamentid');
     this.tournamentname = this.route.snapshot.paramMap.get('tournamentname');
+
+    this.tournament.id = tournamentid;
+    this.tournament.name = this.tournamentname;
 
     return this.eventservice.getEvents(tournamentid)
         .subscribe((data : any) => {this.events=data;this.getEventGroups(data);});
@@ -151,6 +167,33 @@ export class EventsComponent implements OnInit {
 
     }
 
+  }
+
+  addToBetslip(market : IMarket, event : IEvent){
+    this.sentBet = {
+
+      id:0,
+      market : market,
+      sportype : this.sporType,
+      odds : market.odds,
+      tournament : this.tournament,
+      date : event.date,
+      event : event,
+      bettype : this.selectedbettype,
+      stake : 0,
+      payout : 0
+    }
+
+    this.betslipservice.addBet(this.sentBet);
+
+  }
+
+  waitForOneSecond() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve("I promise to return after one second!");
+      }, 300);
+    });
   }
 
 }
