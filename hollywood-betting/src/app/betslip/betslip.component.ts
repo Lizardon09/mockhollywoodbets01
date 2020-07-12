@@ -21,6 +21,9 @@ export class BetslipComponent implements OnInit {
   finalodds = 0;
   multiplestake = 0;
   multiplepayout = 0;
+  defaultTestAccountId = 1;
+  successfullbet = false;
+  unsuccessfullbet = false;
 
   constructor(
     private betsliptservice : BetslipService
@@ -78,6 +81,38 @@ export class BetslipComponent implements OnInit {
 
   calculateMultipleStakeForPayout(payout : number){
     this.betsliptservice.calculateMultipleStakeForPayout(payout, this.finalodds);
+  }
+
+  bookSingleBet(betid : number){
+    this.betsliptservice.bookSingleBet(this.defaultTestAccountId, betid).subscribe(data=>{console.log(data);this.waitForOneSecond().then((value)=>{this.betResult(data)})});
+  }
+
+  bookMultipleBet(){
+    this.betsliptservice.bookMultipleBet(this.defaultTestAccountId).subscribe(data=>{console.log(data); this.waitForOneSecond().then((value)=>{this.betResult(data)})});
+  }
+
+  betResult(data : any){
+    if(data.status=="Success"){
+      this.successfullbet = true;
+      this.unsuccessfullbet = false;
+    }
+    else{
+      this.unsuccessfullbet = true;
+      this.successfullbet = false;
+    }
+  }
+
+  closeSuccess(){
+    this.successfullbet = false;
+    this.unsuccessfullbet = false;
+  }
+
+  waitForOneSecond() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve("I promise to return after one second!");
+      }, 300);
+    });
   }
 
 }

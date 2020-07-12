@@ -4,6 +4,34 @@
             <div class="card-header" style="background-color: #643e94;border-radius: 0px;">
                 Bet Slip ({{betslipitems.length}})
             </div>
+            <div *ngIf="successfullbet===true">
+                <div class="card" style="margin: 3px; background: #1e1e1e;">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-10">
+                                <h6 class="card-title" style="color: chartreuse;">Successfull bet made</h6>
+                            </div>
+                            <div class="col-2">
+                                <i class="fa fa-times" style="color: #d9534f;" (click) = "closeSuccess()"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="unsuccessfullbet===true">
+                <div class="card" style="margin: 3px; background: #1e1e1e;">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-10">
+                                <h6 class="card-title" style="color: red;">Unsuccessfull bet made</h6>
+                            </div>
+                            <div class="col-2">
+                                <i class="fa fa-times" style="color: #d9534f;" (click) = "closeSuccess()"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div *ngIf="default; else notDefault">
                 <div class="card-body" style="margin: 3px; background: #1e1e1e;">
                     <p class="card-text"><strong>To place a bet: </strong> Choose the sport, tournament and event that you would like to bet on. Then select a market by clicking the odds that you would like to bet on</p>
@@ -22,10 +50,10 @@
                                 </div>
                             </div>
                             <p class="card-text">{{bet.sportype.name}} {{bet.odds}}</p>
-                            <p class="card-text">{{bet.date}}</p>
+                            <p class="card-text">{{bet.date | date : "medium"}}</p>
                             <p class="card-text">{{bet.event.name}}</p>
 
-                                <button type="button" class="btn btn-primary btn-block" style="background:#643e94;border:#643e94">BOOK THIS BET</button>
+                                <button type="button" class="btn btn-primary btn-block" style="background:#643e94;border:#643e94" (click)="bookSingleBet(bet.id)">BOOK THIS BET</button>
                                 <hr style="border: 0.5px solid white;">
 
                                   <div class="row" style="align-content: center!important;justify-content: center!important;display: flex!important;">
@@ -70,7 +98,7 @@
 
                             <div class="row d-flex justify-content-around mt-3">
                                 <div class="col-12">
-                                    <button type="button" class="btn btn-primary btn-block" style="background:#643e94;border:#643e94">BOOK MULTIPLE</button>
+                                    <button type="button" class="btn btn-primary btn-block" style="background:#643e94;border:#643e94" (click)="bookMultipleBet()">BOOK MULTIPLE</button>
                                     <hr style="border: 0.5px solid white;">
                                 </div>
                                 <div class="col-md-6">
